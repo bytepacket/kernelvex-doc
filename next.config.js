@@ -14,5 +14,7 @@ module.exports = withNextra({
         unoptimized: true,
     },
     trailingSlash: true,
+
+    basePath: '/en/latest',
 });
 

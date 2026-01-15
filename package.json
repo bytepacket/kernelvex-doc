@@ -1,0 +1,25 @@
+{
+  "name": "kernelvex-documentation",
+  "version": "0.0.1",
+  "description": "Kernelvex Documentation",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "static": "next static",
+    "start": "next start",
+    "postbuild": "pagefind --site out --output-path out/_pagefind"
+  },
+  "dependencies": {
+    "next": "^13.4.18",
+    "nextra": "^2.11.0",
+    "nextra-theme-docs": "^2.11.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-window": "^1.8.9"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.10",
+    "pagefind": "^1.4.0",
+    "typescript": "^4.9.3"
+  }
+}

@@ -1,0 +1,82 @@
+# KernelVex
+
+A type-safe, compile-time unit conversion and geometric pose library written in Rust, designed for robotics and embedded systems.
+
+## Overview
+
+**KernelVex** is a `no_std` compatible Rust library that provides:
+
+- **Type-safe unit conversions** with compile-time guarantees
+- **SI unit measurements** (Length, Time, Angles)
+- **Geometric pose transformations** using homogeneous coordinates
+- **Mathematical operations** using `libm` for `no_std` environments
+- **Zero runtime overhead** through Rust's type system
+
+## Features
+
+### 🔢 Units
+
+KernelVex uses Rust's type system to prevent unit conversion errors at compile time:
+
+```rust
+let a = Length: : <Meter>::new(1.0);
+let b = Length::<Centimeter>::new(50.0);
+let c = Length::<Inch>::new(12.0);
+
+let sum = a + b + c;  // Automatically handles conversions
+let sum_cm = sum.to: :<Centimeter>();  // Convert to any unit
+```
+
+**Supported Units:**
+
+- **Length**: `Meter`, `Centimeter`, `Millimeter`, `Inch`, `Foot`
+- **Time**: `Seconds`, `Minutes`, `Hours`
+- **Angles**: `Radians`, `Degrees`
+
+### 📐 Angle Operations
+
+```rust
+let x = Angle::<Degrees>::new(90.0);
+let y = x.to::<Radians>();
+
+let sine = x.sin();
+let cosine = x.cos();
+let tangent = x.tan();
+
+let normalized = y.normalize();  // Normalize to [-π, π]
+```
+
+### 🤖 Pose Transformations
+
+```rust
+let p = Pose::new(-1., -2., 0.0. into());
+let r = Pose::new(2., 1., 0.0.into());
+
+let combined = p * r;  // Compose transformations
+
+let distance = p.distance(r);
+let angle = p.angle(r);
+let rotated = p.rotate(Angle: :<Radians>::new(1.57));
+```
+
+## Installation
+
+Add to your `Cargo.toml`:
+
+```toml
+[dependencies]
+kernelvex = { git = "https://github.com/bytepacket/kernelvex" }
+```
+
+
+## License
+
+This project is open source.  Check the repository for license details.
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+---
+
+**Repository**:  [github.com/bytepacket/kernelvex](https://github.com/bytepacket/kernelvex)

@@ -16,34 +16,32 @@ A type-safe, compile-time unit conversion and geometric pose library written in 
 
 ### 🔢 Units
 
-KernelVex uses Rust's type system to prevent unit conversion errors at compile time:
+KernelVex uses typenum's type system to prevent unit conversion errors at compile time:
 
 ```rust
-let a = Length: : <Meter>::new(1.0);
-let b = Length::<Centimeter>::new(50.0);
-let c = Length::<Inch>::new(12.0);
+let a = QLength::from_meters(1.0);
+let b = QLength::from_inches(50.0);
+let c = QAngle::from_radians(12.0);
 
-let sum = a + b + c;  // Automatically handles conversions
-let sum_cm = sum.to: :<Centimeter>();  // Convert to any unit
+let sum = a + b;  // QLength + QLength => QLength
+let err = sum + c;  // QLength + QAngle is not valid
 ```
 
 **Supported Units:**
 
-- **Length**: `Meter`, `Centimeter`, `Millimeter`, `Inch`, `Foot`
-- **Time**: `Seconds`, `Minutes`, `Hours`
-- **Angles**: `Radians`, `Degrees`
+- **Length**: `Meter`, `Centimeter`, `Inch`
+- **Time**: `Seconds`, `Minutes`
+- **Angles**: `Radians`, `Degrees`, `Turns`
 
 ### 📐 Angle Operations
 
 ```rust
-let x = Angle::<Degrees>::new(90.0);
-let y = x.to::<Radians>();
+let x = QAngle::from_radians(90.0);
+let y = x.as_degrees();
 
 let sine = x.sin();
 let cosine = x.cos();
 let tangent = x.tan();
-
-let normalized = y.normalize();  // Normalize to [-π, π]
 ```
 
 ### 🤖 Pose Transformations
@@ -56,7 +54,7 @@ let combined = p * r;  // Compose transformations
 
 let distance = p.distance(r);
 let angle = p.angle(r);
-let rotated = p.rotate(Angle: :<Radians>::new(1.57));
+let rotated = p.rotate(QAngle::from_radians(1.57));
 ```
 
 ## Installation
